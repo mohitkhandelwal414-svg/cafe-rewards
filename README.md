@@ -1,6 +1,7 @@
 <div align="center">
   <h1>☕ CaféRewards</h1>
   <p><strong>A Modern Loyalty & Rewards Management System built for Cafés.</strong></p>
+  <p>🚀 <strong>Live Demo:</strong> <a href="https://cafe-rewards.netlify.app/">https://cafe-rewards.netlify.app/</a></p>
   
   <p>
     <img src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-646CFF?style=for-the-badge&logo=react" alt="Frontend"/>

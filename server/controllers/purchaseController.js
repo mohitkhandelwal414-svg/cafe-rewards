@@ -18,9 +18,9 @@ const createPurchase = async (req, res) => {
       });
     }
 
-    if (Number(purchaseAmount) <= 0) {
+    if (isNaN(purchaseAmount) || Number(purchaseAmount) <= 0) {
       return res.status(400).json({
-        message: "Purchase amount must be greater than 0",
+        message: "Purchase amount must be a valid number greater than 0",
       });
     }
 

@@ -36,7 +36,7 @@ function Dashboard({ user, token, onLogout }) {
     const fetchRewards = async () => {
         try {
             const res = await getRewards(token);
-            setRewards(res || []);
+            setRewards(res.rewards || []);
         } catch (err) {
             console.error(err);
         }
@@ -60,7 +60,7 @@ function Dashboard({ user, token, onLogout }) {
         setMessage("");
         try {
             const res = await getMemberTransactions(token, member._id);
-            setTransactions(res || []);
+            setTransactions(res.transactions || []);
         } catch (err) {
             console.error(err);
         }
@@ -184,7 +184,7 @@ function Dashboard({ user, token, onLogout }) {
                                     </div>
                                     <div className="stat-box">
                                         <label>Tier</label>
-                                        <div className={`stat-value tier-${selectedMember.tier.toLowerCase()}`}>{selectedMember.tier}</div>
+                                        <div className={`stat-value tier-${(selectedMember.tier || 'bronze').toLowerCase()}`}>{selectedMember.tier || 'Bronze'}</div>
                                     </div>
                                     <div className="stat-box">
                                         <label>Qualifying Pts</label>
@@ -217,11 +217,11 @@ function Dashboard({ user, token, onLogout }) {
                                             required
                                         >
                                             <option value="">Select Reward</option>
-                                            {rewards.map(r => (
+                                            {Array.isArray(rewards) ? rewards.map(r => (
                                                 <option key={r._id} value={r._id} disabled={selectedMember.pointsBalance < r.pointsRequired}>
                                                     {r.name} ({r.pointsRequired} pts)
                                                 </option>
-                                            ))}
+                                            )) : null}
                                         </select>
                                         <button type="submit" className="primary-btn mt select-btn">Redeem Points</button>
                                     </form>
@@ -231,7 +231,7 @@ function Dashboard({ user, token, onLogout }) {
                             <div className="card tx-card">
                                 <h3>Transaction History</h3>
                                 <div className="tx-list">
-                                    {transactions.length > 0 ? transactions.map(tx => (
+                                    {Array.isArray(transactions) && transactions.length > 0 ? transactions.map(tx => (
                                         <div key={tx._id} className="tx-item">
                                             <div>
                                                 <strong>{tx.type}</strong>

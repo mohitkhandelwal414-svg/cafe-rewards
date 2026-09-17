@@ -29,9 +29,9 @@ const createReward = async (req, res) => {
       });
     }
 
-    if (Number(pointsRequired) < 0) {
+    if (isNaN(pointsRequired) || Number(pointsRequired) < 0) {
       return res.status(400).json({
-        message: "pointsRequired cannot be negative",
+        message: "pointsRequired must be a valid non-negative number",
       });
     }
 

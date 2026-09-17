@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getMembers, createMember, recordPurchase, getRewards, redeemReward, getMemberTransactions } from "./api";
+import { getMembers, createMember, recordPurchase, getRewards, redeemReward, getMemberTransactions, createReward } from "./api";
 import "./Dashboard.css";
 
 function Dashboard({ user, token, onLogout }) {
@@ -16,6 +16,10 @@ function Dashboard({ user, token, onLogout }) {
     const [transactions, setTransactions] = useState([]);
     const [purchaseAmount, setPurchaseAmount] = useState("");
     const [selectedRewardId, setSelectedRewardId] = useState("");
+
+    // Reward Form
+    const [newRewardName, setNewRewardName] = useState("");
+    const [newRewardPoints, setNewRewardPoints] = useState("");
 
     const [message, setMessage] = useState("");
 
@@ -63,6 +67,19 @@ function Dashboard({ user, token, onLogout }) {
             setTransactions(res.transactions || []);
         } catch (err) {
             console.error(err);
+        }
+    };
+
+    const handleCreateReward = async (e) => {
+        e.preventDefault();
+        try {
+            await createReward(token, newRewardName, "Café Reward", Number(newRewardPoints));
+            setNewRewardName("");
+            setNewRewardPoints("");
+            fetchRewards();
+            setMessage("Reward created successfully!");
+        } catch (err) {
+            setMessage("Failed to create reward.");
         }
     };
 
@@ -167,6 +184,27 @@ function Dashboard({ user, token, onLogout }) {
                                 required
                             />
                             <button type="submit" className="primary-btn">Add</button>
+                        </form>
+                    </div>
+
+                    <div className="card">
+                        <h3>Create New Reward</h3>
+                        <form onSubmit={handleCreateReward} className="inline-form">
+                            <input
+                                type="text"
+                                placeholder="Ex: Free Coffee"
+                                value={newRewardName}
+                                onChange={e => setNewRewardName(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="number"
+                                placeholder="Points Required"
+                                value={newRewardPoints}
+                                onChange={e => setNewRewardPoints(e.target.value)}
+                                required
+                            />
+                            <button type="submit" className="primary-btn" style={{ background: '#059669' }}>Save Reward</button>
                         </form>
                     </div>
                 </div>

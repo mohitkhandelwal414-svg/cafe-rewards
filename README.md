@@ -45,13 +45,20 @@ cd cafe-rewards
 cd server
 npm install
 ```
-You must create a `.env` file in the `/server` directory to safely hold the database credentials:
+
+**⚠️ CRITICAL: Environment Variables (.env)**
+You absolutely must create a file named exactly `.env` inside the `server/` folder (the path should be `cafe-rewards/server/.env`). Place the following text inside it:
+
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=your_super_secret_jwt_key
+# Retrieve this string from MongoDB Atlas Dashboard -> Database -> Connect -> Drivers
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/caferewards?retryWrites=true&w=majority
+# This can be any random long text string used for hashing logins
+JWT_SECRET=super_secret_cafe_key_12345
 ```
-Start the server:
+*(Make sure to replace `<username>` and `<password>` in the `MONGO_URI` with your actual MongoDB database user credentials!)*
+
+Start the backend server:
 ```bash
 npm run dev
 ```

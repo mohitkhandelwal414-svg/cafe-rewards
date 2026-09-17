@@ -93,7 +93,7 @@ function Dashboard({ user, token, onLogout }) {
                 setPurchaseAmount("");
                 fetchMembers();
                 const txRes = await getMemberTransactions(token, selectedMember._id);
-                setTransactions(txRes || []);
+                setTransactions(txRes.transactions || []);
             } else {
                 setMessage(res.message || "Failed to record purchase.");
             }
@@ -112,7 +112,7 @@ function Dashboard({ user, token, onLogout }) {
                 setMessage(`Reward redeemed successfully: ${res.redemption.rewardName}`);
                 fetchMembers();
                 const txRes = await getMemberTransactions(token, selectedMember._id);
-                setTransactions(txRes || []);
+                setTransactions(txRes.transactions || []);
             } else {
                 setMessage(res.message || "Redemption failed.");
             }

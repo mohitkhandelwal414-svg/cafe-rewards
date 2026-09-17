@@ -4,6 +4,7 @@ const Transaction = require("../models/Transaction");
 
 const createRedemption = async (req, res) => {
     try {
+        console.log("REDEMPTION PAYLOAD RECEIVED:", req.body, req.headers["content-type"]);
         const { memberId, rewardId } = req.body;
 
         if (!memberId || !rewardId) {

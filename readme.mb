@@ -1,0 +1,152 @@
+# ☕ CaféRewards — Loyalty & Rewards Management System
+
+CaféRewards is a full-stack loyalty and rewards management system designed for cafés to manage customers, purchases, loyalty points, membership tiers, rewards, and transaction history.
+
+The application provides a staff-facing interface where staff members can manage loyalty members and perform reward-related operations through a secure REST API.
+
+---
+
+## 🚀 Features
+
+### 🔐 Authentication
+- Staff registration
+- Staff login
+- JWT-based authentication
+- Password hashing using bcrypt
+- Protected API routes
+
+### 👥 Member Management
+- Create new loyalty members
+- View all members
+- Search members by name or phone number
+- Pagination
+- Sorting
+- View individual member details
+- View member points balance
+- View transaction history
+
+### 💰 Loyalty Points
+- Points are calculated by the backend
+- Points are awarded when a purchase is recorded
+- Member tier is automatically calculated
+- Current points balance is maintained in the database
+
+### 🏆 Membership Tiers
+
+The current reward configuration uses:
+
+| Tier | Qualifying Points | Points Multiplier |
+|------|-------------------:|------------------:|
+| Bronze | 0 – 499 | 1.0x |
+| Silver | 500 – 999 | 1.25x |
+| Gold | 1000+ | 1.5x |
+
+> These reward rules are configurable in the backend reward service.
+
+### 🎁 Rewards
+- Create rewards
+- View active rewards
+- Define points required for each reward
+- Redeem rewards using loyalty points
+- Prevent redemption when the member has insufficient points
+
+### 📊 Transactions
+Every purchase or redemption is recorded as a transaction.
+
+Transaction information includes:
+
+- Member
+- Transaction type
+- Points
+- Purchase amount
+- Reward
+- Balance after transaction
+- Timestamp
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Fetch API
+
+## Backend
+
+- Node.js
+- Express.js
+- REST API
+- JWT
+- bcryptjs
+
+## Database
+
+- MongoDB
+- Mongoose
+- MongoDB Atlas
+
+## Development Tools
+
+- Git
+- GitHub
+- GitHub Codespaces
+- VS Code
+- Postman / cURL
+
+---
+
+# 📁 Project Structure
+
+```text
+cafe-rewards/
+│
+├── client/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── api.js
+│   │   └── main.jsx
+│   ├── package.json
+│   └── ...
+│
+├── server/
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── memberController.js
+│   │   ├── purchaseController.js
+│   │   └── rewardController.js
+│   │
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   │
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Member.js
+│   │   ├── Reward.js
+│   │   └── Transaction.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── memberRoutes.js
+│   │   ├── purchaseRoutes.js
+│   │   └── rewardRoutes.js
+│   │
+│   ├── services/
+│   │   └── rewardsService.js
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   └── server.js
+│
+├── README.md
+├── REASONING.md
+├── AI_LOGS.md
+└── .gitignore
